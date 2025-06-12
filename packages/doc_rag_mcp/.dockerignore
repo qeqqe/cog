@@ -9,8 +9,7 @@ Thumbs.db
 .idea/
 *.sublime-workspace
 *.sublime-project
-.temp
-qdrant_data
+
 # Node/Next.js
 node_modules/
 .next/
@@ -39,6 +38,9 @@ build/
 *.h5
 *.sqlite
 *.ipynb_checkpoints
+app.egg-info
+*.pyc
+.mypy_cache
 
 # uv (Python package manager)
 .uv/
@@ -61,10 +63,6 @@ htmlcov/
 test-results/
 junit-*.xml
 
-# Environment variables
-.env
-.env.*
-!.env.example
 
 # Docker
 *.tar
