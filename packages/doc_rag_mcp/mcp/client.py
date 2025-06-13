@@ -19,10 +19,11 @@ async def get_context(url: str):
     
     """
     try:
-        response = await get(f"{BACKEND_URL}/get_context?url={url}")
-        response.raise_for_status()
-        CONTEXT = response.text
-        return CONTEXT
+        import httpx
+        async with httpx.AsyncClient() as client:
+            response = await client.get(f"{BACKEND_URL}/scrape/get_context?url={url}")
+            response.raise_for_status()
+            return response.json()
     except Exception as e:
         return f"Error retrieving context: {str(e)}"
 

@@ -39,6 +39,7 @@ build/
 *.h5
 *.sqlite
 *.ipynb_checkpoints
+*.lock
 
 # uv (Python package manager)
 .uv/
