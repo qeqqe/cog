@@ -94,8 +94,7 @@ async def crawl_and_process_batch(urls: List[str], batch_size: int = 10) -> Asyn
                         - Semantically chunking
                         - Embedding the chunks
                         - Storing the embeddings
-                        """
-                        
+                        """                        
                         yield {
                             "success": True,
                             "url": url,
