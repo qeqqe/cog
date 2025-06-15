@@ -4,6 +4,7 @@ from xml.etree import ElementTree as ET
 from typing import List, AsyncGenerator, Dict, Any
 import httpx
 import logging
+from ..chunker.chunker import chunk_content
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -94,7 +95,9 @@ async def crawl_and_process_batch(urls: List[str], batch_size: int = 10) -> Asyn
                         - Semantically chunking
                         - Embedding the chunks
                         - Storing the embeddings
-                        """                        
+                        """    
+                        SEMANTIC_CHUNKS = chunk_content(content)
+                        logger.info(f"Semantic chunk length: {len(SEMANTIC_CHUNKS)}")
                         yield {
                             "success": True,
                             "url": url,
@@ -147,3 +150,9 @@ async def get_sitemap_urls(sitemap_url: str) -> List[str]:
     except Exception as e:
         logger.error(f"Error fetching sitemap: {e}")
         return []
+
+
+if __name__ == "__main__":
+    url = "https://ai.pydantic.dev/sitemap.xml"
+    loop = asyncio.get_event_loop()
+    result = loop.run_until_complete(crawl_sequentially(url))
