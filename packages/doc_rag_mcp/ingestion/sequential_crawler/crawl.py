@@ -4,6 +4,8 @@ from xml.etree import ElementTree as ET
 from typing import List, AsyncGenerator, Dict, Any
 import httpx
 import logging
+
+from packages.doc_rag_mcp.ingestion.embedder.embedder import embed_text
 from ..chunker.chunker import chunk_content
 
 logging.basicConfig(level=logging.INFO)
@@ -92,11 +94,16 @@ async def crawl_and_process_batch(urls: List[str], batch_size: int = 10) -> Asyn
                         content_length = len(content)
                         """TODO
                         Shit to add:
-                        - Semantically chunking
+                        - Semantically chunking -
                         - Embedding the chunks
                         - Storing the embeddings
-                        """    
+                        """
                         SEMANTIC_CHUNKS = chunk_content(content)
+                        EMBEDDINGS: List = []
+                        for chunk in SEMANTIC_CHUNKS:
+                            embedding = embed_text(chunk)
+                            EMBEDDINGS.append(embedding)
+                        
                         logger.info(f"Semantic chunk length: {len(SEMANTIC_CHUNKS)}")
                         yield {
                             "success": True,
