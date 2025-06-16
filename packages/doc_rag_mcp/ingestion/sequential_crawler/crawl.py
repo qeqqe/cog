@@ -4,9 +4,9 @@ from xml.etree import ElementTree as ET
 from typing import List, AsyncGenerator, Dict, Any
 import httpx
 import logging
-
-from packages.doc_rag_mcp.ingestion.embedder.embedder import embed_text
 from ..chunker.chunker import chunk_content
+from ..embedder.embedder import embed_text
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
